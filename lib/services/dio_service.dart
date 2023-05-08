@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DioClient {
   // final String baseUrl = "https://uat.xuriti.app/api";
   // final String baseUrl = "https://dev.xuriti.app/api";
-  final String baseUrl = "https://dev.xuriti.app/api";
+  final String baseUrl = "https://uat.xuriti.app/api";
   // final String baseUrl = "https://biz.xuriti.app/api";
 //  final String baseUrl = "https://demo.xuriti.app/api";
   // final String launchUrl = "https://www.xuriti.com/";

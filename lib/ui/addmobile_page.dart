@@ -3,6 +3,8 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/helper/serice_locator.dart';
+import 'package:groupeii_app/services/dio_service.dart';
 import 'package:groupeii_app/ui/basicinfo_page.dart';
 import 'package:groupeii_app/ui/dash_board.dart';
 // import 'package:flutter/src/widgets/container.dart';
@@ -18,8 +20,98 @@ class Addmobile extends StatefulWidget {
 }
 
 class _AddmobileState extends State<Addmobile> {
+  String phone = "";
+  String otp = "";
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _otprecived = TextEditingController();
+  // OtpFieldController otpController = OtpFieldController();
+
+  Future<Map<String, dynamic>?> sendotp() async {
+    String url = "/auth/send-otp";
+
+    Map<String, dynamic> data = {
+      "recipient": _numberController.text,
+      "login_type": 'mobile_app',
+      "recaptcha": "test_recaptcha"
+    };
+    // String? token = await getIt<SharedPreferences>().getString("token");
+
+    Map<String, dynamic>? responseData = await getIt<DioClient>().post(
+        url,
+        data,
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpdiI6ImViMzczM2ExZmRjMWM3NDRmMzdiZjdhZDQ0YjgyMmIzIiwiY29udGVudCI6IjZmMjc0NTdjYzYyMTg4NjFlM2IyZTI4YmNiMWI3M2NiM2UzNmNlMWU4OTRlMWNmYmNjYWNmMGRkMTU5ZDFjZjgxZWE1YmYzZGQ4OWVjZDM5YTMxYmNhMDRhZTlkMzUwOWE1MTY0M2Q2MzExMWMyYzgyYTc4YjJmMDdlZWNmMzM3NDdmMDE5ZDA3ZjIzNWEyNDM0MTdiMzI0ZGQyOTBhIiwiaWF0IjoxNjgyNDIxMzU1LCJleHAiOjE2ODI0NTAxNTV9.ERozGEQnX2Y3Wi4Ipgw4XTQz4oFnqvqHJ1vshEi-4rohnUX4S46GHVl7crSVVTiAANCoa-KaNrBeYT1XQNPyyt_kvNzxMKB5_cn3ag4sk8vSyon3p83OiQ57wYF2ZZsloFEo1OPv5Y2cCumsCgWP9sz2SR-yyrDdfRtG-sZVtbub7KgFyKo5bHfiGEB9tchJTTDS43peA0GVfjcVu6CluIfaPjGrhpTeIt6UU9wZTdur9Jn1tEQzH0hjT7e84o1uxMbkOHC4XAB9mh54lvme5zm2cvQ67vO0cGnGVevByvXJwXsrQsi34oSDMW_STz_V5ujmRzuDkHU-7qD1n2wEmqSlzFFHFESODkHUaso_RgGr0_6QHebvzTaZnPm4jM1GBAB23gCKvv9B2LCHTy_hcO0GTBD-mgyyTNB0RAwbN7dPxp8OVOdV-UQLt3Y3Af6gSplTjDVOxTGcR3t_yow0nXc1k_JM6GShXQr9go8_u7bpGAvP0BuTz8NPAwUmKygu");
+
+    try {
+      if (responseData != null) {
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => const DashBoard()));
+        //print(responseData);
+        print(responseData);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return responseData;
+  }
+
+  Future<Map<String, dynamic>?> verifyotp() async {
+    String url = "/auth/verify-otp";
+
+    Map<String, dynamic> data = {
+      "recipient": _numberController.text,
+      "otp": _otprecived.text,
+      "login_type": 'mobile_app',
+      "recaptcha": "test_recaptcha"
+    };
+    // String? token = await getIt<SharedPreferences>().getString("token");
+
+    Map<String, dynamic>? responseData = await getIt<DioClient>().post(
+        url,
+        data,
+        "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpdiI6ImViMzczM2ExZmRjMWM3NDRmMzdiZjdhZDQ0YjgyMmIzIiwiY29udGVudCI6IjZmMjc0NTdjYzYyMTg4NjFlM2IyZTI4YmNiMWI3M2NiM2UzNmNlMWU4OTRlMWNmYmNjYWNmMGRkMTU5ZDFjZjgxZWE1YmYzZGQ4OWVjZDM5YTMxYmNhMDRhZTlkMzUwOWE1MTY0M2Q2MzExMWMyYzgyYTc4YjJmMDdlZWNmMzM3NDdmMDE5ZDA3ZjIzNWEyNDM0MTdiMzI0ZGQyOTBhIiwiaWF0IjoxNjgyNDIxMzU1LCJleHAiOjE2ODI0NTAxNTV9.ERozGEQnX2Y3Wi4Ipgw4XTQz4oFnqvqHJ1vshEi-4rohnUX4S46GHVl7crSVVTiAANCoa-KaNrBeYT1XQNPyyt_kvNzxMKB5_cn3ag4sk8vSyon3p83OiQ57wYF2ZZsloFEo1OPv5Y2cCumsCgWP9sz2SR-yyrDdfRtG-sZVtbub7KgFyKo5bHfiGEB9tchJTTDS43peA0GVfjcVu6CluIfaPjGrhpTeIt6UU9wZTdur9Jn1tEQzH0hjT7e84o1uxMbkOHC4XAB9mh54lvme5zm2cvQ67vO0cGnGVevByvXJwXsrQsi34oSDMW_STz_V5ujmRzuDkHU-7qD1n2wEmqSlzFFHFESODkHUaso_RgGr0_6QHebvzTaZnPm4jM1GBAB23gCKvv9B2LCHTy_hcO0GTBD-mgyyTNB0RAwbN7dPxp8OVOdV-UQLt3Y3Af6gSplTjDVOxTGcR3t_yow0nXc1k_JM6GShXQr9go8_u7bpGAvP0BuTz8NPAwUmKygu");
+
+    try {
+      if (responseData != null) {
+        return responseData;
+        print(responseData);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return responseData;
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future<Map<String, dynamic>?> verifyotp() async {
+      String url = "/auth/verify-otp";
+
+      Map<String, dynamic> data = {
+        "mobileNumber": _numberController.text,
+        "otp": _otprecived.text,
+        // "login_type": 'mobile_app',
+        // "recaptcha": "test_recaptcha"
+      };
+      // String? token = await getIt<SharedPreferences>().getString("token");
+
+      Map<String, dynamic>? responseData = await getIt<DioClient>().post(
+          url,
+          data,
+          "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpdiI6ImViMzczM2ExZmRjMWM3NDRmMzdiZjdhZDQ0YjgyMmIzIiwiY29udGVudCI6IjZmMjc0NTdjYzYyMTg4NjFlM2IyZTI4YmNiMWI3M2NiM2UzNmNlMWU4OTRlMWNmYmNjYWNmMGRkMTU5ZDFjZjgxZWE1YmYzZGQ4OWVjZDM5YTMxYmNhMDRhZTlkMzUwOWE1MTY0M2Q2MzExMWMyYzgyYTc4YjJmMDdlZWNmMzM3NDdmMDE5ZDA3ZjIzNWEyNDM0MTdiMzI0ZGQyOTBhIiwiaWF0IjoxNjgyNDIxMzU1LCJleHAiOjE2ODI0NTAxNTV9.ERozGEQnX2Y3Wi4Ipgw4XTQz4oFnqvqHJ1vshEi-4rohnUX4S46GHVl7crSVVTiAANCoa-KaNrBeYT1XQNPyyt_kvNzxMKB5_cn3ag4sk8vSyon3p83OiQ57wYF2ZZsloFEo1OPv5Y2cCumsCgWP9sz2SR-yyrDdfRtG-sZVtbub7KgFyKo5bHfiGEB9tchJTTDS43peA0GVfjcVu6CluIfaPjGrhpTeIt6UU9wZTdur9Jn1tEQzH0hjT7e84o1uxMbkOHC4XAB9mh54lvme5zm2cvQ67vO0cGnGVevByvXJwXsrQsi34oSDMW_STz_V5ujmRzuDkHU-7qD1n2wEmqSlzFFHFESODkHUaso_RgGr0_6QHebvzTaZnPm4jM1GBAB23gCKvv9B2LCHTy_hcO0GTBD-mgyyTNB0RAwbN7dPxp8OVOdV-UQLt3Y3Af6gSplTjDVOxTGcR3t_yow0nXc1k_JM6GShXQr9go8_u7bpGAvP0BuTz8NPAwUmKygu");
+
+      try {
+        if (responseData != null) {
+          return responseData;
+        }
+      } catch (e) {
+        print(e);
+      }
+
+      return responseData;
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -105,6 +197,8 @@ class _AddmobileState extends State<Addmobile> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 45, vertical: 16),
                   child: TextFormField(
+                    maxLength: 10,
+                    controller: _numberController,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -125,7 +219,8 @@ class _AddmobileState extends State<Addmobile> {
               style: TextButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 231, 196, 43)),
               onPressed: () {
-                debugPrint('Received click');
+                // debugPrint('Received click');
+                sendotp();
               },
               child: const Text('SEND OTP'),
             ),
@@ -136,7 +231,9 @@ class _AddmobileState extends State<Addmobile> {
                   fontSize: 18,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                sendotp();
+              },
               child: const Text('Resend OTP'),
             ),
             SizedBox(
@@ -185,26 +282,42 @@ class _AddmobileState extends State<Addmobile> {
             ),
             Padding(
               padding: const EdgeInsets.all(30.0),
-              child: OTPTextField(
-                length: 4,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: 80,
-                style: TextStyle(fontSize: 17),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-                // onCompleted: () {
-                //   print("Completed: " );
-                // },
+              child: TextFormField(
+                controller: _otprecived,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red)),
+                  labelText: 'Please Enter OTP',
+                  prefixIcon: Icon(Icons.keyboard_alt_outlined),
+                ),
               ),
+
+              //  OTPTextField(
+              //   // controller: otpController,
+
+              //   length: 4,
+              //   width: MediaQuery.of(context).size.width,
+              //   fieldWidth: 80,
+              //   style: TextStyle(fontSize: 17),
+              //   textFieldAlignment: MainAxisAlignment.spaceAround,
+              //   fieldStyle: FieldStyle.underline,
+              //   // onCompleted: () {
+              //   //   print("Completed: " );
+              //   // },
+              // ),
             ),
             OutlinedButton(
               style: TextButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 231, 196, 43)),
               onPressed: () {
+                verifyotp();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const BasicInfoPage()));
+                        builder: (context) => BasicInfoPage(
+                              number: _numberController,
+                            )));
               },
               child: const Text('VERIFY OTP'),
             ),

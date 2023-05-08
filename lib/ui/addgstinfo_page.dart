@@ -43,10 +43,10 @@ class _AddGstInfopageState extends State<AddGstInfopage> {
                   icon: const Icon(Icons.arrow_back_ios),
                   color: Colors.black,
                   onPressed: () {
-                    Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const GstSearchPage()));
+                    // Navigator.pop(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => const GstSearchPage()));
                   },
                 ),
               ),

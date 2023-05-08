@@ -1,10 +1,13 @@
 //import 'package:flutter/cupertino.dart';
 // import 'dart:ui';
 
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 
 // import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+import 'package:groupeii_app/Models/userdetails_model.dart';
 //import 'package:get/get.dart';
 // import 'package:groupeii_app/Models/userdetails_model.dart';
 import 'package:groupeii_app/helper/serice_locator.dart';
@@ -46,9 +49,16 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       if (responseData != null) {
+        // print(responseData["user"]["_id"]);
+        // var user_data = responseData['user'];
+        UserDetails user = UserDetails.fromJson(responseData);
+        print(user.user?.sId);
+        dynamic u_id = user.user?.sId;
+        // print("aaaaaaaaaa$u_id");
+
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const DashBoard()));
-        //print(responseData);
+            MaterialPageRoute(builder: (context) => DashBoard()));
+        print(responseData);
       }
     } catch (e) {
       print(e);
@@ -66,136 +76,134 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).primaryColor,
-        ),
         body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  const Text(
-                    "ASSITIVE ONBARDING APP",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text("Group chatting application for Fun",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w300,
-                      )),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Image.asset("assests/Onboarding-amico.png"),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: textInputDecoration.copyWith(
-                        labelText: "Email",
-                        prefixIcon: Icon(
-                          Icons.email_outlined,
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    onChanged: (e) {
-                      setState(() {
-                        email = e;
-                        // print(email);
-                      });
-                    },
-                    // validator: (e) {
-                    //   return RegExp(
-                    //               // ignore: valid_regexps
-                    //               "/^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*")
-                    //           .hasMatch(e!)
-                    //       ? null
-                    //       : "Please enter a valide email";
-                    // },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: _passwordController,
-                    obscureText: true,
-                    decoration: textInputDecoration.copyWith(
-                        labelText: "Password",
-                        prefixIcon: Icon(
-                          Icons.password_outlined,
-                          color: Theme.of(context).primaryColor,
-                        )),
-                    validator: (pass) {
-                      if (pass!.length < 8) {
-                        return "Password must be 8 charecters";
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (pass) {
-                      setState(() {
-                        password = pass;
-                        // print(pass);
-                      });
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                        child: const Text(
-                          "LOGIN",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
-                        onPressed: (() {
-                          _signwithuser();
-                        }),
-                      )),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text.rich(TextSpan(
-                    text: "Dont have an account?  ",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 14,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Register here',
-                        style: TextStyle(
-                            color: Colors.black,
-                            decoration: TextDecoration.underline),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = (() {
-                            nextscreen(context, const RegisterPage());
-                          }),
-                      )
-                    ],
-                  ))
-                ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                "ASSITIVE ONBARDING APP",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
               ),
-            ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text("Group chatting application for Fun",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                  )),
+              SizedBox(
+                height: 30,
+              ),
+              Image.asset("assests/Onboarding-amico.png"),
+              TextFormField(
+                controller: _emailController,
+                decoration: textInputDecoration.copyWith(
+                    labelText: "Email",
+                    prefixIcon: Icon(
+                      Icons.email_outlined,
+                      color: Theme.of(context).primaryColor,
+                    )),
+                onChanged: (e) {
+                  setState(() {
+                    email = e;
+                    // print(email);
+                  });
+                },
+                // validator: (e) {
+                //   return RegExp(
+                //               // ignore: valid_regexps
+                //               "/^[a-zA-Z0-9.!#%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*")
+                //           .hasMatch(e!)
+                //       ? null
+                //       : "Please enter a valide email";
+                // },
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: textInputDecoration.copyWith(
+                    labelText: "Password",
+                    prefixIcon: Icon(
+                      Icons.password_outlined,
+                      color: Theme.of(context).primaryColor,
+                    )),
+                validator: (pass) {
+                  if (pass!.length < 8) {
+                    return "Password must be 8 charecters";
+                  } else {
+                    return null;
+                  }
+                },
+                onChanged: (pass) {
+                  setState(() {
+                    password = pass;
+                    // print(pass);
+                  });
+                },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        )),
+                    child: const Text(
+                      "LOGIN",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                    onPressed: (() {
+                      _signwithuser();
+                    }),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              Text.rich(TextSpan(
+                text: "Dont have an account?  ",
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Register here',
+                    style: TextStyle(
+                        color: Colors.black,
+                        decoration: TextDecoration.underline),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = (() {
+                        nextscreen(context, const RegisterPage());
+                      }),
+                  )
+                ],
+              ))
+            ],
           ),
-        ));
-  }
-
-  login() {
-    if (formKey.currentState!.validate()) {}
+        ),
+      ),
+    ));
   }
 }
+
+//   login() {
+//     if (formKey.currentState!.validate()) {}
+//   }
+// }

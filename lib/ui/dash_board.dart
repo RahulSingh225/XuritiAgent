@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:groupeii_app/ui/addmobile_page.dart';
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({super.key});
+  const DashBoard({super.key,   });
+ 
 
   @override
   State<DashBoard> createState() => _DashBoardState();
