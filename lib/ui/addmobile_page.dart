@@ -18,6 +18,15 @@ class Addmobile extends StatefulWidget {
 }
 
 class _AddmobileState extends State<Addmobile> {
+String phonenumber = "";
+  String otp="";
+  // String email="";
+  // String mobile="";
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +118,7 @@ class _AddmobileState extends State<Addmobile> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red)),
-                      labelText: 'Enter Retailers phnone number',
+                      labelText: 'Enter Retailers phone number',
                       prefixIcon: Icon(Icons.keyboard_alt_outlined),
                     ),
                   ),

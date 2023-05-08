@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 //import 'package:get/get.dart';
 // import 'package:groupeii_app/Models/userdetails_model.dart';
 import 'package:groupeii_app/helper/serice_locator.dart';
-import 'package:groupeii_app/pages/auth/register_page.dart';
+// import 'package:groupeii_app/pages/auth/register_page.dart';
 import 'package:groupeii_app/services/dio_service.dart';
 import 'package:groupeii_app/ui/dash_board.dart';
 import 'package:groupeii_app/widget/widget.dart';
@@ -79,13 +79,13 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   const Text(
-                    "ASSITIVE ONBARDING APP",
+                    "AGENT ONBOARDING",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text("Group chatting application for Fun",
+                  const Text("Agent Applicaion",
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w300,
@@ -183,7 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: TextDecoration.underline),
                         recognizer: TapGestureRecognizer()
                           ..onTap = (() {
-                            nextscreen(context, const RegisterPage());
+                            // nextscreen(context, const ());
                           }),
                       )
                     ],

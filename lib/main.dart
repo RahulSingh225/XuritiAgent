@@ -1,6 +1,7 @@
 // import 'package:firebase_core/firebase_core.dart';
 // import 'package:flutter/foundation.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+
 // import 'package:groupeii_app/helper/helper_function.dart';
 // import 'package:groupeii_app/pages/auth/login_page.dart';
 // import 'package:groupeii_app/pages/home_page.dart';
@@ -187,6 +188,8 @@ import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/addgstinfo_page.dart';
 //import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/basicinfo_page.dart';
+import 'package:groupeii_app/ui/dash_board.dart';
+import 'package:groupeii_app/ui/gstsearch_page.dart';
 //import 'package:groupeii_app/ui/dash_board.dart';
 // import 'package:groupeii_app/ui/addmobile_pages.dart';
 //import 'package:groupeii_app/ui/home_page.dart';
@@ -219,7 +222,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AddGstInfopage(),
+      home: LoginPage(),
     );
   }
 }
