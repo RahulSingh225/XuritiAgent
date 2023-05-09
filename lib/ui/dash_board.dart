@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import 'package:groupeii_app/pages/ui/addmobile_page.dart';
 import 'package:groupeii_app/ui/addmobile_page.dart';
+import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
 
 class DashBoard extends StatefulWidget {
-  const DashBoard({super.key,   });
- 
+  const DashBoard({
+    super.key,
+  });
 
   @override
   State<DashBoard> createState() => _DashBoardState();
@@ -96,7 +98,13 @@ class _DashBoardState extends State<DashBoard> {
                       ],
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const selectCompany()),
+                    );
+                  },
                 ),
               ],
             ),

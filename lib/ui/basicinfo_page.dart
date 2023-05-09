@@ -33,7 +33,6 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
 
-  
   Future AddUser() async {
     String url = "/auth/register-user";
     //  BasicUserInfo user;
@@ -51,7 +50,6 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
 
     try {
       if (responseData?['status'] == true) {
-         
         // return responseData;
         // Navigator.push(context,
         //     MaterialPageRoute(builder: (context) => const GstSearchPage(_mobile:widget.number.text)));
@@ -243,11 +241,11 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  GstSearchPage(
+                          builder: (context) => GstSearchPage(
                               firstname: _firstNameController,
                               lastname: _lastNameController,
                               retaileremail: _emailController,
-                              retailercontact: _mobileController)));
+                              retailerphone: widget.number)));
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(

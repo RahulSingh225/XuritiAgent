@@ -27,7 +27,6 @@ class GstSearchPage extends StatefulWidget {
     this.lastname,
     this.retaileremail,
     this.retailerphone,
-    required TextEditingController retailercontact,
   });
 
   @override
@@ -90,15 +89,14 @@ class _GstSearchPageState extends State<GstSearchPage> {
 
     // String? token = await getIt<SharedPreferences>().getString("token");
     Map<String, dynamic> data = {
-      "gstin": company?.gstin,
-      "admin_email": widget.retaileremail,
-      "admin_mobile": widget.retailerphone,
-      "pan": company?.gstin.substring(2, 12),
+      "gstin": "9040903JFDK",
+      "admin_email": "jhj@gmail.com",
+      "admin_mobile": "903202039",
+      "pan": "BJKPP2832B",
       "consent_gst_defaultFlag": "true",
-      "companyName": company?.companyName,
-      "userId": "skjnnsfmsmsfsf",
+      "companyName": "kjf",
+      "userId": "GHFVMKGJHDD356487C",
       "recaptcha": "test_recaptcha"
-      "userID"  "63ac087916c0369739bb3963",
     };
 
     Map<String, dynamic>? responseData = await getIt<DioClient>().post(

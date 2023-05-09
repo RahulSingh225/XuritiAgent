@@ -15,6 +15,7 @@ import 'package:groupeii_app/pages/auth/register_page.dart';
 import 'package:groupeii_app/services/dio_service.dart';
 import 'package:groupeii_app/ui/dash_board.dart';
 import 'package:groupeii_app/widget/widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -52,12 +53,14 @@ class _LoginPageState extends State<LoginPage> {
         // print(responseData["user"]["_id"]);
         // var user_data = responseData['user'];
         UserDetails user = UserDetails.fromJson(responseData);
+        // getIt<SharedPreferences>().setString("token", responseData["token"]);
+        // getIt<SharedPreferences>().setString("_id", responseData["_id"]);
         print(user.user?.sId);
         dynamic u_id = user.user?.sId;
         // print("aaaaaaaaaa$u_id");
 
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DashBoard()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DashBoard()));
         print(responseData);
       }
     } catch (e) {

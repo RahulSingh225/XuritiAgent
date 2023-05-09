@@ -187,6 +187,7 @@ import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/addgstinfo_page.dart';
 //import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/basicinfo_page.dart';
+import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
 //import 'package:groupeii_app/ui/dash_board.dart';
 // import 'package:groupeii_app/ui/addmobile_pages.dart';
 //import 'package:groupeii_app/ui/home_page.dart';
