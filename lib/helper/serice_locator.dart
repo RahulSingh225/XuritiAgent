@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+
 import 'package:groupeii_app/services/dio_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';

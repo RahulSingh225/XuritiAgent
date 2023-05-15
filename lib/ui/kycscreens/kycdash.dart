@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/ui/kycscreens/gstupload.dart';
 import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
 
 class kycdash extends StatefulWidget {
@@ -103,6 +104,16 @@ class _kycdashState extends State<kycdash> {
             ),
           ),
           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: const Divider(
+              height: 10,
+              thickness: 0.5,
+              indent: 20,
+              endIndent: 15,
+              color: Colors.black,
+            ),
+          ),
+          Padding(
             padding: const EdgeInsets.only(top: (0)),
             child: Container(
               width: 400,
@@ -116,7 +127,43 @@ class _kycdashState extends State<kycdash> {
                 elevation: 0,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[],
+                  children: <Widget>[
+                    Align(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text("Gst Doumentation"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(Icons.done),
+                                Text("Successful"),
+                              ],
+                            ),
+                            OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                  primary: Colors.grey),
+                              icon: Icon(Icons.upload_file_outlined),
+                              label: Text(
+                                'Start',
+                              ),
+                              onPressed: () {
+                                print('Pressed');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Gstupload()));
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

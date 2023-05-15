@@ -6,13 +6,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DioClient {
   // final String baseUrl = "https://uat.xuriti.app/api";
-  final String baseUrl = "https://dev.xuriti.app/api";
-  // final String baseUrl = "https://uat.xuriti.app/api";
+  // final String baseUrl = "https://dev.xuriti.app/api";
+  final String baseUrl = "https://uat.xuriti.app/api";
   // final String baseUrl = "https://biz.xuriti.app/api";
 //  final String baseUrl = "https://demo.xuriti.app/api";
   // final String launchUrl = "https://www.xuriti.com/";
   //final String launchUrl = "https://dev.xuriti.app/#/";
   final String contactUrl = "https://www.xuriti.com/contact-us/";
+
+  // DioClient({Type? dioClient, baseUrl});
+
+  // DioClient(DioClient baseUrl);
 
   postFormData(String endUrl, FormData data, String? token) async {
     BaseOptions options = new BaseOptions(
@@ -81,8 +85,8 @@ class DioClient {
   // }
 
   post(String endUrl, Map<String, dynamic> data, String? token) async {
+    print('ppppppppppppp$token');
     var dio = Dio();
-
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
       client.badCertificateCallback =
@@ -90,6 +94,7 @@ class DioClient {
       return client;
     };
     String url = baseUrl + endUrl;
+    print(url);
     try {
       if (token == null) {
         Response response = await dio.post(url, data: data);
@@ -98,8 +103,12 @@ class DioClient {
       Response response = await dio.post(url,
           data: data,
           options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      print(response.data);
       return response.data;
-    } catch (e) {}
+    } catch (e) {
+      print('llllllllllllllll$e');
+    }
   }
 
   // postNotification(
@@ -125,7 +134,7 @@ class DioClient {
   //   return response.data;
   // }
 
-  get(String endUrl, {String? token}) async {
+  get(String endUrl, String? token,) async {
     var dio = Dio();
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (HttpClient client) {
@@ -394,6 +403,8 @@ class DioClient {
       print(e);
     }
   }
+
+  //entity api call
 
   // pan verify
   verify_pan(String url, FormData data, String? token) async {

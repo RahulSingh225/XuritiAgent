@@ -4,8 +4,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:groupeii_app/Models/companygstserch_model.dart';
+import 'package:groupeii_app/Models/get_company_list.dart';
+import 'package:groupeii_app/helper/serice_locator.dart';
+import 'package:groupeii_app/services/dio_service.dart';
 import 'package:groupeii_app/ui/dash_board.dart';
 import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 class selectCompany extends StatefulWidget {
   const selectCompany({super.key});
@@ -15,6 +21,27 @@ class selectCompany extends StatefulWidget {
 }
 
 class _selectCompanyState extends State<selectCompany> {
+  Future<Map<String, dynamic>?> selectCompany() async {
+    String url = "/entity/entities";
+    String? token = getIt<SharedPreferences>().getString("token");
+
+    Map<String, dynamic>? responseData =
+        await getIt<DioClient>().get(url, token);
+    // print("tokeeeeeen $token");
+    // print(responseData);
+    // print(responseData?['companies']);
+    dynamic getsellerlist = responseData![1]['company'];
+    print(getsellerlist);
+    CompanyDetails companylist = CompanyDetails.fromJson(getsellerlist);
+
+    if (responseData![0]['status'] == true) {
+      dynamic getsellerlist = responseData['company'];
+      CompanyDetails companylist = CompanyDetails.fromJson(getsellerlist);
+
+      // print('comappannyyyy$companylist');
+    } else {}
+  }
+
   final List<String> items = [
     'Item1',
     'Item2',
@@ -26,6 +53,8 @@ class _selectCompanyState extends State<selectCompany> {
     'Item8',
   ];
   String? selectedValue;
+  String? token = getIt<SharedPreferences>().getString("token");
+  String endUrl = "/entity/entities";
 
   @override
   Widget build(BuildContext context) {
@@ -347,9 +376,10 @@ class _selectCompanyState extends State<selectCompany> {
               style: TextButton.styleFrom(
                   foregroundColor: Color.fromARGB(255, 231, 196, 43)),
               onPressed: () {
+                // selectCompany();
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => kycdash()));
-                // debugPrint('Received click');
+                debugPrint('Received click');
                 // sendotp();
               },
               child: const Text('PROCEED'),

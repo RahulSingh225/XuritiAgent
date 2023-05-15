@@ -32,6 +32,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  get token => "";
+
   Future<Map<String, dynamic>?> _signwithuser() async {
     String url = "/auth/user-login";
 
@@ -52,15 +54,25 @@ class _LoginPageState extends State<LoginPage> {
       if (responseData != null) {
         // print(responseData["user"]["_id"]);
         // var user_data = responseData['user'];
+        String token = responseData["token"];
         UserDetails user = UserDetails.fromJson(responseData);
-        // getIt<SharedPreferences>().setString("token", responseData["token"]);
+        getIt<SharedPreferences>().setString("token", responseData["token"]);
         // getIt<SharedPreferences>().setString("_id", responseData["_id"]);
         print(user.user?.sId);
+        print(responseData["token"]);
         dynamic u_id = user.user?.sId;
+
+        print("tokeenn$token");
+
+        getIt<SharedPreferences>()
+            .setString("_id", responseData['user']["_id"]);
+        // getIt<SharedPreferences>()
+        //     .setString("token", responseData['token']["token"]);
+        // print('tokennnnnn$token');
         // print("aaaaaaaaaa$u_id");
 
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DashBoard()));
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => DashBoard()));
         print(responseData);
       }
     } catch (e) {
@@ -174,6 +186,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: (() {
                       _signwithuser();
+                      
+             Navigator.push(
+            context, MaterialPageRoute(builder: (context) => DashBoard()));
                     }),
                   )),
               const SizedBox(

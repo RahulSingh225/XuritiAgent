@@ -187,6 +187,8 @@ import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/addgstinfo_page.dart';
 //import 'package:groupeii_app/pages/auth/login_page.dart';
 import 'package:groupeii_app/ui/basicinfo_page.dart';
+import 'package:groupeii_app/ui/gstsearch_page.dart';
+import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
 import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
 //import 'package:groupeii_app/ui/dash_board.dart';
 // import 'package:groupeii_app/ui/addmobile_pages.dart';
@@ -220,7 +222,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: kycdash(),
     );
   }
 }

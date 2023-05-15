@@ -27,32 +27,36 @@ class Company {
     required this.tan,
   });
 
-  factory Company.fromJson(Map<String, dynamic> json) => Company(
-        gstin: json["gstin"],
-        companyName: json["companyName"],
-        address: json["address"],
-        district: json["district"],
-        state: List<String>.from(json["state"].map((x) => x)),
-        pinCode: json["pinCode"],
-        industryType: json["industry_type"],
-        adminMobile: json["admin_mobile"],
-        adminEmail: json["admin_email"],
-        pan: json["pan"],
-        cin: json["cin"],
-        tan: json["tan"],
-      );
-  Map<String, dynamic> toJson() => {
-        "gstin": gstin,
-        "companyName": companyName,
-        "address": address,
-        "district": district,
-        "state": List<dynamic>.from(state.map((x) => x)),
-        "pinCode": pinCode,
-        "industry_type": industryType,
-        "admin_mobile": adminMobile,
-        "admin_email": adminEmail,
-        "pan": pan,
-        "cin": cin,
-        "tan": tan,
-      };
+  factory Company.fromJson(Map<String, dynamic> json) {
+    return Company(
+      gstin: json["gstin"],
+      companyName: json["companyName"],
+      address: json["address"],
+      district: json["district"],
+      state: List<String>.from(json["state"].map((x) => x)),
+      pinCode: json["pinCode"],
+      industryType: json["industry_type"],
+      adminMobile: json["admin_mobile"],
+      adminEmail: json["admin_email"],
+      pan: json["pan"],
+      cin: json["cin"],
+      tan: json["tan"],
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      "gstin": gstin,
+      "companyName": companyName,
+      "address": address,
+      "district": district,
+      "state": List<dynamic>.from(state.map((x) => x)),
+      "pinCode": pinCode,
+      "industry_type": industryType,
+      "admin_mobile": adminMobile,
+      "admin_email": adminEmail,
+      "pan": gstin,
+      "cin": cin,
+      "tan": tan,
+    };
+  }
 }

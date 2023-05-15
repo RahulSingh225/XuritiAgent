@@ -8,7 +8,6 @@ class UserDetails {
   UserDetails.fromJson(Map<String, dynamic> json) {
     user = json['user'] != null ? new UserData.fromJson(json['user']) : null;
     token = json['token'];
-    // status= json['status'];
   }
 
   Map<String, dynamic> toJson() {
