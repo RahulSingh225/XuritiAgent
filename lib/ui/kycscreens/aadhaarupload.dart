@@ -1,20 +1,20 @@
-import 'dart:io';
-
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:io';
 
-class Gstupload extends StatefulWidget {
-  const Gstupload({super.key});
+class Aadhaar extends StatefulWidget {
+  const Aadhaar({super.key});
 
   @override
-  State<Gstupload> createState() => _GstuploadState();
+  State<Aadhaar> createState() => _AadhaarState();
 }
 
-class _GstuploadState extends State<Gstupload> {
+class _AadhaarState extends State<Aadhaar> {
   List<XFile>? selectedImages = [];
 
   Future<void> pickImagesFromGallery() async {
@@ -43,91 +43,12 @@ class _GstuploadState extends State<Gstupload> {
       });
     }
   }
-  // List<File> _image = [];
-//   List<XFile>? pickedFiles = [];
-//   List<XFile> selectedImages = [];
-//   // List<XFile>? selectedImages1;
 
-//   List<XFile>? selectedImages2 = [];
-
-//   String? get path => null;
-
-// Future<void> captureImage() async {
-//   try {
-//     XFile? capturedFile = await ImagePicker().pickImage(
-//       source: ImageSource.camera,
-//       imageQuality: 80,
-//       maxWidth: 800,
-//     );
-
-//     if (capturedFile != null) {
-//       setState(() {
-//         selectedImages2!.add(capturedFile);
-//       });
-//     } else {
-//       // No image captured
-//       print('No image captured.');
-//     }
-//   } catch (e) {
-//     // Error occurred while capturing image
-//     print('Error capturing image: $e');
-//   }
-// }
-// In this code, the selectedImages list is initialized as an empty list. When captureImage is called, the captured image is appended to the selectedImages list using the add method.
-
-// By doing this, each time you capture an image, it will be added to the list, allowing you to store multiple images.
-
-// Remember to adjust the code according to your specific requirements and handle any null or empty cases appropriately.
-
-  // Future getImage(ImageSource source) async {
-  //   List<XFile>? pickedFiles = [];
-  //   <XFile>? capturedfiles = await ImagePicker().pickImage(
-  //     source: source, imageQuality: 80, // Set the image quality (0-100)
-  //     maxWidth: 800,
-  //   );
-
-  //   if (pickedFiles != null && pickedFiles.isNotEmpty) return;
-  //   final imageTemporary = File(capturedfiles!.path);
-  //   //  setState(() {
-  //   //   selectedImages = pickedfiles;
-  //   // });
-  //   //   List<File> files =
-  //   //  pickedfiles((XFile pickedfile) => File(pickedfile.path)).toList();
-
-  //   setState(() {
-  //     // selectedImages = _image;
-  //     selectedImages = imageTemporary as List<File>;
-  //   });
-  // }
-
-  // Future<void> captureImage() async {
-  //   XFile? capturedFile = await ImagePicker().pickImage(
-  //     source: ImageSource.camera,
-  //     imageQuality: 80,
-  //     maxWidth: 800,
-  //   );
-
-  //   if (capturedFile != null) {
-  //     setState(() {
-  //       selectedImages = [capturedFile];
-  //     });
-  //   }
-  // }
-
-  // Future pickImagesFromGallery() async {
-  //   List<XFile>? pickedFiles = await ImagePicker().pickMultiImage(
-  //     imageQuality: 80, // Set the image quality (0-100)
-  //     maxWidth: 800, // Set the maximum width of the image
-  //   );
-
-  //   if (pickedFiles != null) {
-  //     List<File> files =
-  //         pickedFiles.map((XFile pickedFile) => File(pickedFile.path)).toList();
-  //     setState(() {
-  //       selectedImages.addAll(XFile(path));
-  //     });
-  //   }
-  // }
+  @override
+  void initState() {
+    super.initState();
+    // Implement some initialization operations here.
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -342,47 +263,6 @@ class _GstuploadState extends State<Gstupload> {
                             )
                           : Image.asset("assests/Notes1.png"),
                     ),
-                    selectedImages != null
-                        ? OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              primary: Colors.black54,
-                              backgroundColor: Colors.white,
-                              side: BorderSide(color: Colors.amber, width: 1.5),
-                            ),
-                            icon: Icon(Icons.arrow_drop_up_outlined),
-                            label: Text(
-                              'KKKK',
-                            ),
-                            onPressed: () {
-                              // getImage(ImageSource.camera);
-                              print('Pressed');
-
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Gstupload()));
-                            },
-                          )
-                        : OutlinedButton.icon(
-                            style: OutlinedButton.styleFrom(
-                              primary: Colors.black54,
-                              backgroundColor: Colors.white,
-                              side: BorderSide(color: Colors.amber, width: 1.5),
-                            ),
-                            icon: Icon(Icons.arrow_drop_up_outlined),
-                            label: Text(
-                              'hello',
-                            ),
-                            onPressed: () {
-                              // getImage(ImageSource.camera);
-                              print('Pressed');
-
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Gstupload()));
-                            },
-                          ),
 
                     // Image.file(
                     //     _image!,
