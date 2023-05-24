@@ -181,6 +181,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 import 'package:groupeii_app/helper/serice_locator.dart';
 import 'package:groupeii_app/pages/auth/login_page.dart';
@@ -222,7 +223,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: kycdash(),
+      onGenerateRoute: route.controller,
+      initialRoute: route.loginPage,
+      // home: kycdash(),
     );
   }
 }

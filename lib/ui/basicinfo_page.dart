@@ -13,6 +13,7 @@ import 'package:groupeii_app/ui/gstsearch_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/basicinfo_model.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class BasicInfoPage extends StatefulWidget {
   final TextEditingController? number;

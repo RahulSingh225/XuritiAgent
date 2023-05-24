@@ -15,6 +15,7 @@ import 'package:groupeii_app/ui/basicinfo_page.dart';
 import 'package:groupeii_app/ui/dash_board.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../helper/serice_locator.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class GstSearchPage extends StatefulWidget {
   final TextEditingController? firstname;
@@ -49,6 +50,8 @@ class _GstSearchPageState extends State<GstSearchPage> {
   Map<String, dynamic>? gstData = {};
 
   get status => null;
+  
+  get companyname => "";
 
   // get companypan => "";
   // get companyname => "";
@@ -105,7 +108,7 @@ class _GstSearchPageState extends State<GstSearchPage> {
       "userID": userID,
       "admin_mobile": widget.retailerphone!.text,
       "admin_email": widget.retaileremail!.text,
-      "companyName": "hjsdb",
+      "companyName": companyname,
     };
     var op = company2.toString();
     print("$data['pan'],aaaaaaaaaaa,$op");

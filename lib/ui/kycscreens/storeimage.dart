@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class StoreimageUpload extends StatefulWidget {
   const StoreimageUpload({super.key});

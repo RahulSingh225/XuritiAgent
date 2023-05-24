@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 //import 'package:groupeii_app/pages/ui/addmobile_page.dart';
 import 'package:groupeii_app/ui/addmobile_page.dart';
 import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class DashBoard extends StatefulWidget {
   const DashBoard({

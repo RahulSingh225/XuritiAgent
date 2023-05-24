@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:groupeii_app/ui/gstsearch_page.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class AddGstInfopage extends StatefulWidget {
   const AddGstInfopage({super.key});

@@ -12,6 +12,7 @@ import 'package:groupeii_app/ui/dash_board.dart';
 import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class selectCompany extends StatefulWidget {
   const selectCompany({super.key});
@@ -377,8 +378,7 @@ class _selectCompanyState extends State<selectCompany> {
                   foregroundColor: Color.fromARGB(255, 231, 196, 43)),
               onPressed: () {
                 // selectCompany();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => kycdash()));
+                Navigator.pushNamed(context, route.kycdashboard);
                 debugPrint('Received click');
                 // sendotp();
               },

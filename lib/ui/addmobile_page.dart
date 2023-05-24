@@ -11,6 +11,7 @@ import 'package:groupeii_app/ui/dash_board.dart';
 // import 'package:flutter/src/widgets/framework.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class Addmobile extends StatefulWidget {
   const Addmobile({super.key});

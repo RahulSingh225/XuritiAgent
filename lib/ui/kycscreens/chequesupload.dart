@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class ChequeUpload extends StatefulWidget {
   const ChequeUpload({super.key});
@@ -17,6 +18,6 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }

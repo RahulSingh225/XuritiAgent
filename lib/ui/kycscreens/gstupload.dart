@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class Gstupload extends StatefulWidget {
   const Gstupload({super.key});

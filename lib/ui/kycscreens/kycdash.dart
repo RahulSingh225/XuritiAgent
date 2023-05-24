@@ -12,6 +12,7 @@ import 'package:groupeii_app/ui/kycscreens/panupload.dart';
 import 'package:groupeii_app/ui/kycscreens/selectcompany.dart';
 import 'package:groupeii_app/ui/kycscreens/storeimage.dart';
 import 'package:styled_divider/styled_divider.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 
 class kycdash extends StatefulWidget {
   const kycdash({super.key});
@@ -178,10 +179,7 @@ class _kycdashState extends State<kycdash> {
                               ),
                               onPressed: () {
                                 print('Pressed');
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Gstupload()));
+                                Navigator.pushNamed(context, route.gstupload );
                               },
                             )
                           ],
@@ -477,8 +475,6 @@ class _kycdashState extends State<kycdash> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Icon(Icons.error_outline_outlined),
-                                
-                                
                                 SizedBox(
                                   width: 2,
                                 ),

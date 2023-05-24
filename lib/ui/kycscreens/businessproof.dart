@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/routes/routes.dart' as route;
 class BusinessProof extends StatefulWidget {
   const BusinessProof({super.key});
 
@@ -16,6 +17,6 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold();
   }
 }
