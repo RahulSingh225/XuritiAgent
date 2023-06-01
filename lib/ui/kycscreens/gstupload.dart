@@ -3,10 +3,15 @@ import 'dart:io';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:groupeii_app/helper/serice_locator.dart';
+import 'package:groupeii_app/services/dio_service.dart';
 import 'package:groupeii_app/ui/kycscreens/kycdash.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:groupeii_app/routes/routes.dart' as route;
+import 'package:http_parser/http_parser.dart';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Gstupload extends StatefulWidget {
   const Gstupload({super.key});
@@ -17,6 +22,7 @@ class Gstupload extends StatefulWidget {
 
 class _GstuploadState extends State<Gstupload> {
   List<XFile>? selectedImages = [];
+  // Dio dio = Dio();
 
   Future<void> pickImagesFromGallery() async {
     List<XFile>? pickedFiles = await ImagePicker().pickMultiImage(
@@ -44,91 +50,62 @@ class _GstuploadState extends State<Gstupload> {
       });
     }
   }
-  // List<File> _image = [];
-//   List<XFile>? pickedFiles = [];
-//   List<XFile> selectedImages = [];
-//   // List<XFile>? selectedImages1;
 
-//   List<XFile>? selectedImages2 = [];
-
-//   String? get path => null;
-
-// Future<void> captureImage() async {
-//   try {
-//     XFile? capturedFile = await ImagePicker().pickImage(
-//       source: ImageSource.camera,
-//       imageQuality: 80,
-//       maxWidth: 800,
-//     );
-
-//     if (capturedFile != null) {
-//       setState(() {
-//         selectedImages2!.add(capturedFile);
-//       });
-//     } else {
-//       // No image captured
-//       print('No image captured.');
-//     }
-//   } catch (e) {
-//     // Error occurred while capturing image
-//     print('Error capturing image: $e');
-//   }
-// }
-// In this code, the selectedImages list is initialized as an empty list. When captureImage is called, the captured image is appended to the selectedImages list using the add method.
-
-// By doing this, each time you capture an image, it will be added to the list, allowing you to store multiple images.
-
-// Remember to adjust the code according to your specific requirements and handle any null or empty cases appropriately.
-
-  // Future getImage(ImageSource source) async {
-  //   List<XFile>? pickedFiles = [];
-  //   <XFile>? capturedfiles = await ImagePicker().pickImage(
-  //     source: source, imageQuality: 80, // Set the image quality (0-100)
-  //     maxWidth: 800,
-  //   );
-
-  //   if (pickedFiles != null && pickedFiles.isNotEmpty) return;
-  //   final imageTemporary = File(capturedfiles!.path);
-  //   //  setState(() {
-  //   //   selectedImages = pickedfiles;
-  //   // });
-  //   //   List<File> files =
-  //   //  pickedfiles((XFile pickedfile) => File(pickedfile.path)).toList();
-
-  //   setState(() {
-  //     // selectedImages = _image;
-  //     selectedImages = imageTemporary as List<File>;
-  //   });
-  // }
-
-  // Future<void> captureImage() async {
-  //   XFile? capturedFile = await ImagePicker().pickImage(
-  //     source: ImageSource.camera,
-  //     imageQuality: 80,
-  //     maxWidth: 800,
-  //   );
-
-  //   if (capturedFile != null) {
-  //     setState(() {
-  //       selectedImages = [capturedFile];
-  //     });
+  // Future uploadFile({required File? file}) async {
+  //   if (file == null) {
+  //     Map<String, dynamic> errorMessage = {
+  //       'msg': 'File upload failed',
+  //       'status': false
+  //     };
+  //     return errorMessage;
+  //   } else {
+  //     //final fileName = basename(file.path);
+  //     //final destination = 'files/$fileName';
   //   }
   // }
 
-  // Future pickImagesFromGallery() async {
-  //   List<XFile>? pickedFiles = await ImagePicker().pickMultiImage(
-  //     imageQuality: 80, // Set the image quality (0-100)
-  //     maxWidth: 800, // Set the maximum width of the image
-  //   );
+  Future<void> uploadImages() async {
+    try {
+      for (var image in selectedImages!) {
+        String fileName = image.path.split('/').last;
+        String? token = getIt<SharedPreferences>().getString("token");
+        dynamic companyId = getIt<SharedPreferences>().getString('companyId');
+        String? userID = getIt<SharedPreferences>().getString("_id");
 
-  //   if (pickedFiles != null) {
-  //     List<File> files =
-  //         pickedFiles.map((XFile pickedFile) => File(pickedFile.path)).toList();
-  //     setState(() {
-  //       selectedImages.addAll(XFile(path));
-  //     });
-  //   }
-  // }
+        FormData formData = FormData.fromMap({
+          'userID': userID,
+          'companyId': '62e50442ca850b8f8feb9453',
+          'GstDetails': await MultipartFile.fromFile(
+            image.path,
+            filename: fileName,
+            contentType: MediaType(
+                'GstDetails', 'jpeg'), // Adjust the content type if necessary
+          ),
+        });
+
+        // Adjust the API endpoint URL and parameters as per your requirement
+
+        //   Response response = await dio
+        //       .post('https://uat.xuriti.app/api/entity/onboard', data: formData);
+
+        //   // Handle the response as needed
+        //   print('Image uploaded: $fileName');
+        //   print('Response hello: ${response.data}');
+        //  }
+
+        Response response;
+        await getIt<DioClient>()
+            .postFormData('/entity/onboard', formData, token);
+        print('Image uploaded: $fileName');
+
+        // print({response.data});
+      } //???  ///////////$responseData');
+
+    } catch (error) {
+      // Handle any errors that occur during the upload
+      print('Error uploading images: $error');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -355,8 +332,8 @@ class _GstuploadState extends State<Gstupload> {
                               'KKKK',
                             ),
                             onPressed: () {
+                              uploadImages();
                               // getImage(ImageSource.camera);
-                              print('Pressed');
 
                               // Navigator.push(
                               //     context,
